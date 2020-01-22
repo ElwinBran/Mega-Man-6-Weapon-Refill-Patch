@@ -1,0 +1,25 @@
+LOC    OBJ              LINE   SOURCE
+
+                        1      ; Jump to the free space where the actual code is.
+07DC02 4CC0FA           2      ; JMP $FAC0
+                        3      ; Filler No Ops to keep the original code as much intact.
+07DC05 EA               4      ; NOP
+07DC06 EA               5      ; NOP
+-------
+                        6      ; first comes the original health refill code
+07FAB9 A91B             7      ; LDA #$1B
+07FABA 8DE503           8      ; STA $03E5
+                        10     ; Prepare for the jump to the in game refill routine by saving the current registers. The ordering is important!
+07FABD 98               11     ; TYA
+07FABE 48               12     ; PHA
+07FABF 8A               13     ; TXA
+07FAC0 48               14     ; PHA
+07FAC1 2043BA           15     ; JSR $BA43
+                        16     ; According to stack rules, first X is restored then Y
+07FAC4 68               17     ; PLA
+07FAC5 AA               18     ; TAX
+07FAC6 68               19     ; PLA
+07FAC7 A8               20     ; TAY
+                        21     ; Jump back to what is at runtime the original health refill code location.
+07FAC8 4CF7DB           22     ; JMP $DBF7
+
