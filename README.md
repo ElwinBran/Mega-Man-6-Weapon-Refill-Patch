@@ -1,5 +1,4 @@
 # Mega Man 6 Weapon Refill Patch
-\[This description is still work in progress]
 This patch for Mega Man 6 makes weapon energy refill upon death in the whole game. 
 A detailed description can be found [on the RomHacking page of this hack](https://www.romhacking.net/hacks/4758/), as well as an alternative download link.
 In this README you will find further information on how this patch was made and reference material.
@@ -9,12 +8,9 @@ In this README you will find further information on how this patch was made and 
 - [LunarIPS](https://www.romhacking.net/utilities/240/), to create a patch file.
 
 ## Process
-The project was started off by looking up the values that required changing.
-These were acquired by simply using the weapons in game and looking for changed values in the RAM afterwards.
-It was required that the weapon refill happened only when the player died. It was found out that when the players health energy is refilled is a good point to insert the weapon refill code. Then the healthy energy value was found allong with code that changes it.
-These points were found using a Memory breakpoint. 
-Unlike previously patched Mega Man games did Mega Man 4 not have any free space to insert the code on.
-The NES can swap 'ROM banks' at any time by calling the right Memory Mapper Controller Registers. This allows the CPU to access another part of the ROM effectively. 
+As the other hacks, first the weapon energy value offsets were acquired. The refilling process was a bit more tricky because of how the values behaved in Mega Man 6 internally, luckily the in-game procedure was found. After studying and testing the procedure a method was found to call it safely and restore all weapon energy through it. It turned out no values had to be modified and passed to it. However it did reset registers. Because it is unknown which memory is safe to use for free values, it was decided to use the NES Stack to store the registers and restore them from it after the procedure finished.
+
+The patch was tested a lot to ensure its loaded on every instance that the weapons have to be refilled according to the requirements.
 
 ## References
 In order to write the code a lot of knowledge was required. Here I list the sources specifically used for this project.
