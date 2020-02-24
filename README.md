@@ -19,7 +19,7 @@ The NES can swap 'ROM banks' at any time by calling the right Memory Mapper Cont
 ## References
 In order to write the code a lot of knowledge was required. Here I list the sources specifically used for this project.
 [DarkSamus993](https://www.romhacking.net/forum/index.php?action=profile;u=23766) provided information on the in-game routine for refilling weapon energy:
-; refill weapon energy (stage start)
+```; refill weapon energy (stage start)
 ; rom addr = $077A4F
 1D:BA3F:A5 51     LDA $0051    ; stageID
 1D:BA41:C9 09     CMP #$09     ; Mr. X's Fortress, Stage 2
@@ -47,7 +47,7 @@ In order to write the code a lot of knowledge was required. Here I list the sour
 1D:BA73:A9 1B     LDA #$1B
 1D:BA75:8D 91 06  STA $0691    ; refill beat weapon energy
 1D:BA78:60        RTS
-
+```
 
 A big thanks for the people behind these to make 6502 programming more accessible.
 - [An excellent reference for quickly looking up the value of an opcode.](https://www.masswerk.at/6502/6502_instruction_set.html)
